@@ -5,6 +5,7 @@
 ## Usage
 
 ```html
+<script src="image-resizer.js"></script>
 <img src="largeImage.jpg" id="largeImage">
 <img src="" id="resizedImage">
 ```
@@ -22,8 +23,15 @@ resizedImage.src = ImageResizer.resize(largeImage, 500);
 // Resize to half size
 resizedImage.src = ImageResizer.resize(largeImage, 0.5);
 
+// Resize to double size
+resizedImage.src = ImageResizer.resize(largeImage, 2.0);
+
 // PNG (Default value is 'image/jpeg')
 resizedImage.src = ImageResizer.resize(largeImage, 0.3, null, 'image/png');
+
+// File can be passed (if the file was an image)
+var file = someFileGettingFunction();
+resizedImage.src = ImageResizer.resize(file, 0.3);
 ```
 
 ## Example
