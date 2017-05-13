@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Image Resizer</title>
+        <script src="./lib/image-resizer.js"></script>
+        <style>
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
+#dropArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 300px;
+    background-color: #ffddbb;
+}
+
+h1, h2, ul {
+    margin: 10px 0;
+}
+
+.description {
+    font-size: smaller;
+}
+        </style>
+    </head>
+
+    <body>
+        <h1>Image Resizer Sample</h1>
+        <p><a href="https://github.com/syumai/image-resizer/">Code</a></p>
+
+        <div id="app">
+            <div id="dropArea">
+                Drop image here
+            </div>
+
+            <form id="convertForm" action="">
+                <div>
+                    Width: <input type="text" name="width"> Height: <input type="text" name="height">
+                </div>
+                <div>
+                    <button type="submit">Resize image</button>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>If height was empty, resized image will be a square.</li>
+                        <li>If width and height were less than 1 (ex. 0.1, 0.3), values will be recognized as percentage.</li>
+                    </ul>
+                </div>
+            </form>
+
+            <h2>Source Image</h2>
+            <div class="image-container">
+                <img src="" id="sourceImage">
+            </div>
+
+            <h2>Destination Image</h2>
+            <div class="image-container">
+                <img src="" id="destinationImage">
+            </div>
+        </div>
+
+        <script>
+var dropArea = document.getElementById('dropArea');
+    var convertForm = document.getElementById('convertForm');
+    var sourceImage = document.getElementById('sourceImage');
+    var destinationImage = document.getElementById('destinationImage');
+
+    dropArea.addEventListener('dragover', function (event) {
+        event.preventDefault();
+    });
+
+dropArea.addEventListener('drop', function (event) {
+    event.preventDefault();
+    var file = event.dataTransfer.files[0];
+    sourceImage.src = URL.createObjectURL(file);
+});
+
+convertForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var width = parseFloat(convertForm.width.value);
+    var height = parseFloat(convertForm.height.value);
+    destinationImage.src = ImageResizer.resize(sourceImage, width, height);
+});
+        </script>
+    </body>
+</html>
