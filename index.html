@@ -66,17 +66,19 @@ h1, h2, ul {
 
         <script>
 var dropArea = document.getElementById('dropArea');
-    var convertForm = document.getElementById('convertForm');
-    var sourceImage = document.getElementById('sourceImage');
-    var destinationImage = document.getElementById('destinationImage');
+var convertForm = document.getElementById('convertForm');
+var sourceImage = document.getElementById('sourceImage');
+var destinationImage = document.getElementById('destinationImage');
 
-    dropArea.addEventListener('dragover', function (event) {
-        event.preventDefault();
-    });
+dropArea.addEventListener('dragover', function (event) {
+    event.preventDefault();
+});
+
+var file;
 
 dropArea.addEventListener('drop', function (event) {
     event.preventDefault();
-    var file = event.dataTransfer.files[0];
+    file = event.dataTransfer.files[0];
     sourceImage.src = URL.createObjectURL(file);
 });
 
@@ -84,7 +86,9 @@ convertForm.addEventListener('submit', function(event) {
     event.preventDefault();
     var width = parseFloat(convertForm.width.value);
     var height = parseFloat(convertForm.height.value);
-    destinationImage.src = ImageResizer.resize(sourceImage, width, height);
+    ImageResizer.resize(file, width, height, null, function (imageUrl) {
+        destinationImage.src = imageUrl;
+    });
 });
         </script>
     </body>

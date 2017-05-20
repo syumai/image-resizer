@@ -15,23 +15,35 @@ var largeImage = document.getElementById('largeImage');
 var resizedImage = document.getElementById('resizedImage');
 
 // Resize to 400 x 300 px
-resizedImage.src = ImageResizer.resize(largeImage, 400, 300);
+ImageResizer.resize(largeImage, 400, 300, null, function (resultImg) {
+  resizedImage.src = resultImg; 
+});
 
 // Square
-resizedImage.src = ImageResizer.resize(largeImage, 500);
+ImageResizer.resize(largeImage, 500, null, null, function (resultImg) {
+  resizedImage.src = resultImg;
+});
 
 // Resize to half size
-resizedImage.src = ImageResizer.resize(largeImage, 0.5);
+ImageResizer.resize(largeImage, 0.5, null, null, function (resultImg) {
+  resizedImage.src = resultImg;
+});
 
 // Resize to double size
-resizedImage.src = ImageResizer.resize(largeImage, 2.0);
+ImageResizer.resize(largeImage, 2.0, null, null, function (resultImg) {
+  resizedImage.src = resultImg;
+});
 
 // PNG (Default value is 'image/jpeg')
-resizedImage.src = ImageResizer.resize(largeImage, 0.3, null, 'image/png');
+ImageResizer.resize(largeImage, 0.3, null, 'image/png', function (resultImg) {
+  resizedImage.src = resultImg;
+});
 
 // File can be passed (if the file was an image)
 var file = someFileGettingFunction();
-resizedImage.src = ImageResizer.resize(file, 0.3);
+ImageResizer.resize(file, 0.3, null, null, function (resultImg) {
+  resizedImage.src = resultImg;
+});
 ```
 
 ## Example
