@@ -14,6 +14,10 @@
 var largeImage = document.getElementById('largeImage');
 var resizedImage = document.getElementById('resizedImage');
 
+//**
+//* Resizing image
+//*
+
 // Resize to 400 x 300 px
 ImageResizer.resize(largeImage, 400, 300, null, function (resultImg) {
   resizedImage.src = resultImg; 
@@ -24,24 +28,32 @@ ImageResizer.resize(largeImage, 500, null, null, function (resultImg) {
   resizedImage.src = resultImg;
 });
 
-// Resize to half size
-ImageResizer.resize(largeImage, 0.5, null, null, function (resultImg) {
+//**
+//* Scaling image
+//*
+
+// Scale to half size
+ImageResizer.scale(largeImage, 0.5, null, null, function (resultImg) {
   resizedImage.src = resultImg;
 });
 
-// Resize to double size
-ImageResizer.resize(largeImage, 2.0, null, null, function (resultImg) {
+// Scale to double size
+ImageResizer.scale(largeImage, 2.0, null, null, function (resultImg) {
   resizedImage.src = resultImg;
 });
+
+//**
+//* Options
+//*
 
 // PNG (Default value is 'image/jpeg')
-ImageResizer.resize(largeImage, 0.3, null, 'image/png', function (resultImg) {
+ImageResizer.resize(largeImage, 400, 300, 'image/png', function (resultImg) {
   resizedImage.src = resultImg;
 });
 
 // File can be passed (if the file was an image)
 var file = someFileGettingFunction();
-ImageResizer.resize(file, 0.3, null, null, function (resultImg) {
+ImageResizer.scale(file, 0.3, null, null, function (resultImg) {
   resizedImage.src = resultImg;
 });
 ```

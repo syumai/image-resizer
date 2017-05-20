@@ -10,6 +10,10 @@
     flex-direction: column;
 }
 
+#app div {
+    margin: 8px 0;
+}
+
 #dropArea {
     display: flex;
     align-items: center;
@@ -43,12 +47,22 @@ h1, h2, ul {
                     Width: <input type="text" name="width"> Height: <input type="text" name="height">
                 </div>
                 <div>
-                    <button type="submit">Resize image</button>
+                    Image type: 
+                    <select name="type">
+                        <option value="image/jpeg">JPEG</option>
+                        <option value="image/png">PNG</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="radio" name="action" value="resize" checked> Resize (ex. width: 400, height: 300) <br>
+                    <input type="radio" name="action" value="scale"> Scale (ex. width: 0.5, height: 0.3)
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
                 </div>
                 <div class="description">
                     <ul>
                         <li>If height was empty, resized image will be a square.</li>
-                        <li>If width and height were float (ex. 0.3, 1.5), values will be recognized as percentage.</li>
                     </ul>
                 </div>
             </form>
@@ -86,7 +100,9 @@ convertForm.addEventListener('submit', function(event) {
     event.preventDefault();
     var width = parseFloat(convertForm.width.value);
     var height = parseFloat(convertForm.height.value);
-    ImageResizer.resize(file, width, height, null, function (imageUrl) {
+    var type = convertForm.type.value;
+    var action = ImageResizer[convertForm.action.value];
+    action(file, width, height, type, function (imageUrl) {
         destinationImage.src = imageUrl;
     });
 });
